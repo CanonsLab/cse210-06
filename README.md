@@ -1,6 +1,6 @@
 # cse210-06
 
-# Final Project Game/Simulator: 
+# Final Project Game: Pong
 
 # Requirements
 ---
