@@ -39,6 +39,7 @@ ALIGN_RIGHT = 2
 BLACK = Color(0, 0, 0)
 WHITE = Color(255, 255, 255)
 PURPLE = Color(255, 0, 255)
+RED = Color(255, 0, 0)
 
 # KEYS
 LEFT = "left"
