@@ -239,6 +239,18 @@ class SceneManager:
         racket = Racket(body, animation)
         cast.add_actor(RACKET_GROUP, racket)
 
+    def _add_racket2(self, cast):
+        cast.clear_actors(RACKET_GROUP)
+        x = CENTER_X - RACKET_WIDTH / 2
+        y = SCREEN_HEIGHT - RACKET_HEIGHT
+        position = Point(x, y)
+        size = Point(RACKET_WIDTH, RACKET_HEIGHT)
+        velocity = Point(0, 0)
+        body = Body(position, size, velocity)
+        animation = Animation(RACKET_IMAGES, RACKET_RATE)
+        racket = Racket(body, animation)
+        cast.add_actor(RACKET_GROUP, racket)
+
     # ----------------------------------------------------------------------------------------------
     # scripting methods
     # ----------------------------------------------------------------------------------------------
