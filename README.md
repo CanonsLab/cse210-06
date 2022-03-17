@@ -12,6 +12,6 @@ The program should be delivered through a version control system.
 The program should be able to be run from the command line.
 
 ##Authors
-* Christian Vargas (vargas475@gmail.com)
+* Christian Vargas (vargasc475@gmail.com)
 * Samuel Gallew (sdancing971@gmail.com)
 * Canon Jensen (canonjensen@gmail.com)
