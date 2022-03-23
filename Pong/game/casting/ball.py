@@ -1,62 +1,42 @@
-import random
-from constants import *
+
+import constants
 from game.casting.actor import Actor
-from game.casting.point import Point
+from game.shared.point import Point
+
 
 
 class Ball(Actor):
-    """A solid, spherical object that is bounced around in the game."""
+    """
+    A tasty item that snakes like to eat.
     
-    def __init__(self, body, image, debug = False):
-        """Constructs a new Ball.
+    The responsibility of Food is to select a random position and points that it's worth.
 
-        Args:
-            body: A new instance of Body.
-            image: A new instance of Image.
-            debug: If it is being debugged. 
-        """
-        super().__init__(debug)
-        self._body = body
-        self._image = image
+    Attributes:
+        _points (int): The number of points the food is worth.
+    """
+    def __init__(self):
+        "Constructs a new Food."
+        super().__init__()
+        self._points = 0
+        self.set_color(constants.WHITE)
+        self._segments = []
+        self._prepare_body()
 
-    def bounce_x(self):
-        """Bounces the ball in the x direction."""
-        velocity = self._body.get_velocity()
-        rn = random.uniform(0.9, 1.1)
-        vx = velocity.get_x() * rn * -1
-        vy = velocity.get_y()
-        velocity = Point(vx, vy)
-        self._body.set_velocity(velocity)
 
-    def bounce_y(self):
-        """Bounces the ball in the y direction."""
-        velocity = self._body.get_velocity()
-        rn = random.uniform(0.9, 1.1)
-        vx = velocity.get_x()
-        vy = velocity.get_y() * rn * -1 
-        velocity = Point(vx, vy)
-        self._body.set_velocity(velocity)
+    def _prepare_body(self):
+        x = 0
+        y = 0
+        position = Point(x, y)
+        color = constants.WHITE
+        segment = Actor()
+        segment.set_position(position)
+        segment.set_color(color)
+        self._segments.append(segment)
 
-    def get_body(self):
-        """Gets the ball's body.
+    def get_points(self):
+        """Gets the points the food is worth.
         
         Returns:
-            An instance of Body.
+            points (int): The points the food is worth.
         """
-        return self._body
-
-    def get_image(self):
-        """Gets the ball's image.
-        
-        Returns:
-            An instance of Image.
-        """
-        return self._image
-        
-    def release(self):
-        """Release the ball in a random direction."""
-        rn = random.uniform(0.9, 1.1)
-        vx = random.choice([-BALL_VELOCITY * rn, BALL_VELOCITY * rn])
-        vy = -BALL_VELOCITY
-        velocity = Point(vx, vy)
-        self._body.set_velocity(velocity)
+        return self._points

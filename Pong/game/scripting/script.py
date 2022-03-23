@@ -1,8 +1,12 @@
-from game.scripting.action import Action
-
-
 class Script:
-    """A collection of actions."""
+    """A collection of actions.
+
+    The responsibility of Script is to keep track of a collection of actions. It has methods for 
+    adding, removing and getting them by a group name.
+
+    Attributes:
+        _actions (dict): A dictionary of actions { key: group_name, value: a list of actions }
+    """
 
     def __init__(self):
         """Constructs a new Action."""
@@ -12,35 +16,23 @@ class Script:
         """Adds an action to the given group.
         
         Args:
-            group: A string containing the name of the group.
-            action: The instance of Action to add.
+            group (string): The name of the group.
+            action (Action): The action to add.
         """
-        if group not in self._actions.keys():
+        if not group in self._actions.keys():
             self._actions[group] = []
-        self._actions[group].append(action)
-
-    def clear_actions(self, group):
-        """Clears actions from the given group.
-        
-        Args:
-            group: A string containing the name of the group.
-        """
-        if group in self._actions.keys():
-            self._actions[group] = []
-
-    def clear_all_actions(self):
-        """Clears all actions."""
-        for group in self._actions:
-            self._actions[group] = []
+            
+        if not action in self._actions[group]:
+            self._actions[group].append(action)
 
     def get_actions(self, group):
         """Gets the actions in the given group.
         
         Args:
-            group: A string containing the name of the group.
+            group (string): The name of the group.
 
         Returns:
-            A list of Action instances.
+            List: The actions in the group.
         """
         results = []
         if group in self._actions.keys():
@@ -51,8 +43,8 @@ class Script:
         """Removes an action from the given group.
         
         Args:
-            group: A string containing the name of the group.
-            action: The instance of Action to remove.
+            group (string): The name of the group.
+            action (Action): The action to remove.
         """
         if group in self._actions:
             self._actions[group].remove(action)

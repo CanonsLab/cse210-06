@@ -1,11 +1,53 @@
-from constants import *
+import constants
+
+from game.casting.cast import Cast
+from game.casting.ball import Ball
+from game.casting.score import Score
+from game.casting.players import Players
+from game.scripting.script import Script
+from game.scripting.draw_actors_action import DrawActorsAction
 from game.directing.director import Director
-from game.directing.scene_manager import SceneManager
+from game.services.keyboard_service import KeyboardService
+from game.services.video_service import VideoService
+from game.shared.color import Color
+from game.shared.point import Point
+
 
 
 def main():
-    director = Director(SceneManager.VIDEO_SERVICE)
-    director.start_game()
+    
+    # create the cast
+    cast = Cast()
+    P1 = Players()
+    P2 = Players()
+    P1.set_position(Point(1, 250))
+    P2.set_position(Point(880, 250))
+    P1.set_color(constants.WHITE)
+    P2.set_color(constants.WHITE)
+    cast.add_actor("player1", P1)
+    cast.add_actor("player2", P2)
+
+    ball = Ball()
+    x = int(constants.MAX_X / 2)
+    y = int(constants.MAX_Y / 2)
+    ball.set_position(Point(x, y))
+    ball.set_radius(20)
+    cast.add_actor("ball", ball)
+
+    scores = Score()
+    scores.set_position(Point(397, 0))
+    scores.set_font_size(constants.FONT_SIZE)
+    cast.add_actor("scores", scores)
+   
+    # start the game
+    video_service = VideoService()
+
+    script = Script()
+    script.add_action("output", DrawActorsAction(video_service))
+    
+    director = Director(video_service)
+    director.start_game(cast, script)
+
 
 if __name__ == "__main__":
     main()

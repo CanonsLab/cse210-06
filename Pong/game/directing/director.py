@@ -1,12 +1,11 @@
-from constants import *
-from game.casting.cast import Cast
-from game.directing.scene_manager import SceneManager
-from game.scripting.action_callback import ActionCallback
-from game.scripting.script import Script
+class Director:
+    """A person who directs the game. 
+    
+    The responsibility of a Director is to control the sequence of play.
 
-
-class Director(ActionCallback):
-    """A person who directs the game."""
+    Attributes:
+        _video_service (VideoService): For providing video output.
+    """
 
     def __init__(self, video_service):
         """Constructs a new Director using the specified video service.
@@ -15,31 +14,22 @@ class Director(ActionCallback):
             video_service (VideoService): An instance of VideoService.
         """
         self._video_service = video_service
-        self._cast = Cast()
-        self._script = Script()
-        self._scene_manager = SceneManager()
         
-    def on_next(self, scene):
-        """Overriden ActionCallback method transitions to next scene.
-        
+    def start_game(self, cast, script):
+        """Starts the game using the given cast and script. Runs the main game loop.
+
         Args:
-            A number representing the next scene to transition to.
+            cast (Cast): The cast of actors.
+            script (Script): The script of actions.
         """
-        self._scene_manager.prepare_scene(scene, self._cast, self._script)
-        
-    def start_game(self):
-        """Starts the game. Runs the main game loop."""
-        self.on_next(NEW_GAME)
-        self._execute_actions(INITIALIZE)
-        self._execute_actions(LOAD)
+        self._video_service.open_window()
         while self._video_service.is_window_open():
-            self._execute_actions(INPUT)
-            self._execute_actions(UPDATE)
-            self._execute_actions(OUTPUT)
-        self._execute_actions(UNLOAD)
-        self._execute_actions(RELEASE)
-        
-    def _execute_actions(self, group):
+            self._execute_actions("input", cast, script)
+            self._execute_actions("update", cast, script)
+            self._execute_actions("output", cast, script)
+        self._video_service.close_window()
+
+    def _execute_actions(self, group, cast, script):
         """Calls execute for each action in the given group.
         
         Args:
@@ -47,6 +37,6 @@ class Director(ActionCallback):
             cast (Cast): The cast of actors.
             script (Script): The script of actions.
         """
-        actions = self._script.get_actions(group)    
+        actions = script.get_actions(group)    
         for action in actions:
-            action.execute(self._cast, self._script, self)          
+            action.execute(cast, script)          
