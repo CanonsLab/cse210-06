@@ -57,6 +57,36 @@ class Point:
         """
         return self._x == other.get_x() and self._y == other.get_y()
 
+    def in_range(self, other, comp):
+        """Whether or not this Point is equal to the given one.
+
+        Args:
+            other (Point): The opposing point.
+            comp (Point): The Point to compare.
+
+        Returns: 
+            boolean: True if both x and y are equal; false if otherwise.
+        """
+        x1 = self._x
+        y1 = self._y
+        x2 = other.get_x()
+        y2 = other.get_y()
+        if x1 < x2:
+            x_low = x1
+            x_high = x2
+        else:
+            x_low = x2
+            x_high = x1
+        if y1 < y2:
+            y_low = y1
+            y_high = y2
+        else:
+            y_low = y2
+            y_high = y1
+        x_comp = comp.get_x()
+        y_comp = comp.get_y()
+        return x_low <= x_comp and y_low <= y_comp and x_high >= x_comp and y_high >= y_comp
+
     def get_x(self):
         """Gets the horizontal distance.
         

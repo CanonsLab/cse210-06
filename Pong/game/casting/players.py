@@ -28,16 +28,17 @@ class Players(Actor):
     def _prepare_body(self):
         x = 0
         y = 0
-        width = 20
-        height = 80
+        self._width = 20
+        self._height = 80
+        self._color = constants.WHITE
         position = Point(x, y)
         color = constants.WHITE
-        segment = Actor()
-        segment.set_position(position)
-        segment.set_color(color)
-        segment.set_width(width)
-        segment.set_height(height)
-        self._segments.append(segment)
+#        segment = Actor()
+#        segment.set_position(position)
+#        segment.set_color(color)
+#        segment.set_width(width)
+#        segment.set_height(height)
+#        self._segments.append(segment)
         # for i in range(constants.SNAKE_LENGTH):
         #     position = Point(x - i * constants.CELL_SIZE, y)
         #     velocity = Point(1 * constants.CELL_SIZE, 0)
@@ -57,3 +58,11 @@ class Players(Actor):
             x = i.get_position()
             i.set_position(x.add(change))
         return super().set_position(position)
+    
+    def move_next(self):
+        y = (self._position.get_y() + self._velocity.get_y())
+        if y + self._radius + self._height >= constants.MAX_Y:
+            self._position = Point(self._position.get_x(), constants.MAX_Y - self._height - self._radius)
+        if y <= 0:
+            self._position = Point(self._position.get_x(), 0)
+        return super().move_next()
