@@ -30,9 +30,9 @@ class Players(Actor):
         y = 0
         self._width = 20
         self._height = 80
-        self._color = constants.WHITE
+        self._color = constants.ORANGE
         position = Point(x, y)
-        color = constants.WHITE
+        color = constants.ORANGE
 #        segment = Actor()
 #        segment.set_position(position)
 #        segment.set_color(color)

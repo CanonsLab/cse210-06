@@ -18,7 +18,7 @@ class Ball(Actor):
         "Constructs a new Food."
         super().__init__()
         self._points = 0
-        self.set_color(constants.WHITE)
+        self.set_color(constants.PURPLE)
         self._segments = []
         self._prepare_body()
 

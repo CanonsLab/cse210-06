@@ -26,8 +26,8 @@ def main():
     P2 = Players()
     P1.set_position(Point(1, 250))
     P2.set_position(Point(880, 250))
-    P1.set_color(constants.WHITE)
-    P2.set_color(constants.WHITE)
+    P1.set_color(constants.BLUE)
+    P2.set_color(constants.RED)
     cast.add_actor("player1", P1)
     cast.add_actor("player2", P2)
 
@@ -42,6 +42,7 @@ def main():
     scores = Score()
     scores.set_position(Point(397, 0))
     scores.set_font_size(constants.FONT_SIZE)
+    scores.set_color(constants.GREEN)
     cast.add_actor("scores", scores)
    
     # start the game
