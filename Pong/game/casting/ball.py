@@ -1,4 +1,4 @@
-
+import random
 import constants
 from game.casting.actor import Actor
 from game.shared.point import Point
@@ -28,10 +28,10 @@ class Ball(Actor):
         y = 0
         position = Point(x, y)
         color = constants.WHITE
-        segment = Actor()
-        segment.set_position(position)
-        segment.set_color(color)
-        self._segments.append(segment)
+#        segment = Actor()
+#        segment.set_position(position)
+#        segment.set_color(color)
+#        self._segments.append(segment)
 
     def get_points(self):
         """Gets the points the food is worth.

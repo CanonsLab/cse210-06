@@ -18,11 +18,15 @@ class Score(Actor):
         self._point_player2 = 0
         self.add_points(0)
 
-    def add_points(self, points):
+    def add_points(self, points, type=1):
         """Adds the given points to the score's total points.
         
         Args:
             points (int): The points to add.
+            type (int): Whether to add to player1 or 2 (use player number)
         """
-        self._point_player1 += points
+        if type == 1:
+            self._point_player1 += points
+        elif type == 2:
+            self._point_player2 += points
         self.set_text(f"{self._point_player1} : {self._point_player2}")
