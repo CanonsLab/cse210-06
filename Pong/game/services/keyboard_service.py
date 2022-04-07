@@ -31,7 +31,7 @@ class KeyboardService:
         Args:
             key (string): The given key (w, a, s, d or i, j, k, l)
         """
-        pyray_key = self._keys[key.lower()]
+        pyray_key = self._keys[key]
         return pyray.is_key_up(pyray_key)
 
     def is_key_down(self, key):
@@ -40,5 +40,5 @@ class KeyboardService:
         Args:
             key (string): The given key (w, a, s, d or i, j, k, l)
         """
-        pyray_key = self._keys[key.lower()]
+        pyray_key = self._keys[key]
         return pyray.is_key_down(pyray_key)

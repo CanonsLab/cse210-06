@@ -1,3 +1,4 @@
+from unittest.util import _count_diff_hashable
 from game.casting.players import Players
 import constants
 from game.scripting.action import Action
@@ -21,8 +22,8 @@ class ControlActorsAction(Action):
             keyboard_service (KeyboardService): An instance of KeyboardService.
         """
         self._keyboard_service = keyboard_service
-        self._direction = Point(0, constants.CELL_SIZE)
-        self._direction2 = Point(0, constants.CELL_SIZE)
+        self._direction = Point(0, 0)
+        self._direction2 = Point(0, 0)
 
     def execute(self, cast, script):
         """Executes the control actors action.
@@ -35,6 +36,8 @@ class ControlActorsAction(Action):
         if self._keyboard_service.is_key_down('w'):
             self._direction = Point(0, -constants.CELL_SIZE)
         
+        if self._keyboard_service.is_key_up('w'):
+            self._direction = Point(0,0)
         # down
         if self._keyboard_service.is_key_down('s'):
             self._direction = Point(0, constants.CELL_SIZE)
@@ -42,6 +45,9 @@ class ControlActorsAction(Action):
         # up1
         if self._keyboard_service.is_key_down('i'):
             self._direction2 = Point(0, -constants.CELL_SIZE)
+        
+        if self._keyboard_service.is_key_up('i'):
+            self._direction2 = Point(0,0)
         
         # down1
         if self._keyboard_service.is_key_down('k'):
